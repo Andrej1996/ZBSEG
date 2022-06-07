@@ -1,0 +1,1369 @@
+*&---------------------------------------------------------------------*
+*& Report  ZBSEG
+*&
+*&---------------------------------------------------------------------*
+*&
+*&
+*&---------------------------------------------------------------------*
+REPORT zbseg.
+
+TABLES: bseg, bkpf, kna1, lfa1.
+
+TYPES: BEGIN OF st_table,
+         mandt      TYPE bseg-mandt,
+         bukrs      TYPE bseg-bukrs,
+         belnr      TYPE bseg-belnr,
+         gjahr      TYPE bseg-gjahr,
+         buzei      TYPE bseg-buzei,
+         buzid      TYPE bseg-buzid,
+         augdt      TYPE bseg-augdt,
+         augcp      TYPE bseg-augcp,
+         augbl      TYPE bseg-augbl,
+         bschl      TYPE bseg-bschl,
+         koart      TYPE bseg-koart,
+         umskz      TYPE bseg-umskz,
+         umsks      TYPE bseg-umsks,
+         zumsk      TYPE bseg-zumsk,
+         shkzg      TYPE bseg-shkzg,
+         gsber      TYPE bseg-gsber,
+         pargb      TYPE bseg-pargb,
+         mwskz      TYPE bseg-mwskz,
+         qsskz      TYPE bseg-qsskz,
+         dmbtr      TYPE bseg-dmbtr,
+         wrbtr      TYPE bseg-wrbtr,
+         kzbtr      TYPE bseg-kzbtr,
+         pswbt      TYPE bseg-pswbt,
+         pswsl      TYPE bseg-pswsl,
+         txbhw      TYPE bseg-txbhw,
+         txbfw      TYPE bseg-txbfw,
+         mwsts      TYPE bseg-mwsts,
+         wmwst      TYPE bseg-wmwst,
+         hwbas      TYPE bseg-hwbas,
+         fwbas      TYPE bseg-fwbas,
+         hwzuz      TYPE bseg-hwzuz,
+         fwzuz      TYPE bseg-fwzuz,
+         shzuz      TYPE bseg-shzuz,
+         stekz      TYPE bseg-stekz,
+         mwart      TYPE bseg-mwart,
+         txgrp      TYPE bseg-txgrp,
+         ktosl      TYPE bseg-ktosl,
+         qsshb      TYPE bseg-qsshb,
+         kursr      TYPE bseg-kursr,
+         gbetr      TYPE bseg-gbetr,
+         bdiff      TYPE bseg-bdiff,
+         bdif2      TYPE bseg-bdif2,
+         valut      TYPE bseg-valut,
+         zuonr      TYPE bseg-zuonr,
+         sgtxt      TYPE bseg-sgtxt,
+         zinkz      TYPE bseg-zinkz,
+         vbund      TYPE bseg-vbund,
+         bewar      TYPE bseg-bewar,
+         altkt      TYPE bseg-altkt,
+         vorgn      TYPE bseg-vorgn,
+         fdlev      TYPE bseg-fdlev,
+         fdgrp      TYPE bseg-fdgrp,
+         fdwbt      TYPE bseg-fdwbt,
+         fdtag      TYPE bseg-fdtag,
+         fkont      TYPE bseg-fkont,
+         kokrs      TYPE bseg-kokrs,
+         kostl      TYPE bseg-kostl,
+         projn      TYPE bseg-projn,
+         aufnr      TYPE bseg-aufnr,
+         vbeln      TYPE bseg-vbeln,
+         vbel2      TYPE bseg-vbel2,
+         posn2      TYPE bseg-posn2,
+         eten2      TYPE bseg-eten2,
+         anln1      TYPE bseg-anln1,
+         anln2      TYPE bseg-anln2,
+         anbwa      TYPE bseg-anbwa,
+         bzdat      TYPE bseg-bzdat,
+         pernr      TYPE bseg-pernr,
+         xumsw      TYPE bseg-xumsw,
+         xhres      TYPE bseg-xhres,
+         xkres      TYPE bseg-xkres,
+         xopvw      TYPE bseg-xopvw,
+         xcpdd      TYPE bseg-xcpdd,
+         xskst      TYPE bseg-xskst,
+         xsauf      TYPE bseg-xsauf,
+         xspro      TYPE bseg-xspro,
+         xserg      TYPE bseg-xserg,
+         xfakt      TYPE bseg-xfakt,
+         xuman      TYPE bseg-xuman,
+         xanet      TYPE bseg-xanet,
+         xskrl      TYPE bseg-xskrl,
+         xinve      TYPE bseg-xinve,
+         xpanz      TYPE bseg-xpanz,
+         xauto      TYPE bseg-xauto,
+         xncop      TYPE bseg-xncop,
+         xzahl      TYPE bseg-xzahl,
+         saknr      TYPE bseg-saknr,
+         hkont      TYPE bseg-hkont,
+         kunnr      TYPE bseg-kunnr,
+         lifnr      TYPE bseg-lifnr,
+         filkd      TYPE bseg-filkd,
+         xbilk      TYPE bseg-xbilk,
+         gvtyp      TYPE bseg-gvtyp,
+         hzuon      TYPE bseg-hzuon,
+         zfbdt      TYPE bseg-zfbdt,
+         zterm      TYPE bseg-zterm,
+         zbd1t      TYPE bseg-zbd1t,
+         zbd2t      TYPE bseg-zbd2t,
+         zbd3t      TYPE bseg-zbd3t,
+         zbd1p      TYPE bseg-zbd1p,
+         zbd2p      TYPE bseg-zbd2p,
+         skfbt      TYPE bseg-skfbt,
+         sknto      TYPE bseg-sknto,
+         wskto      TYPE bseg-wskto,
+         zlsch      TYPE bseg-zlsch,
+         zlspr      TYPE bseg-zlspr,
+         zbfix      TYPE bseg-zbfix,
+         hbkid      TYPE bseg-hbkid,
+         bvtyp      TYPE bseg-bvtyp,
+         nebtr      TYPE bseg-nebtr,
+         mwsk1      TYPE bseg-mwsk1,
+         dmbt1      TYPE bseg-dmbt1,
+         wrbt1      TYPE bseg-wrbt1,
+         mwsk2      TYPE bseg-mwsk2,
+         dmbt2      TYPE bseg-dmbt2,
+         wrbt2      TYPE bseg-wrbt2,
+         mwsk3      TYPE bseg-mwsk3,
+         dmbt3      TYPE bseg-dmbt3,
+         wrbt3      TYPE bseg-wrbt3,
+         rebzg      TYPE bseg-rebzg,
+         rebzj      TYPE bseg-rebzj,
+         rebzz      TYPE bseg-rebzz,
+         rebzt      TYPE bseg-rebzt,
+         zollt      TYPE bseg-zollt,
+         zolld      TYPE bseg-zolld,
+         lzbkz      TYPE bseg-lzbkz,
+         landl      TYPE bseg-landl,
+         diekz      TYPE bseg-diekz,
+         samnr      TYPE bseg-samnr,
+         abper      TYPE bseg-abper,
+         vrskz      TYPE bseg-vrskz,
+         vrsdt      TYPE bseg-vrsdt,
+         disbn      TYPE bseg-disbn,
+         disbj      TYPE bseg-disbj,
+         disbz      TYPE bseg-disbz,
+         wverw      TYPE bseg-wverw,
+         anfbn      TYPE bseg-anfbn,
+         anfbj      TYPE bseg-anfbj,
+         anfbu      TYPE bseg-anfbu,
+         anfae      TYPE bseg-anfae,
+         blnbt      TYPE bseg-blnbt,
+         blnkz      TYPE bseg-blnkz,
+         blnpz      TYPE bseg-blnpz,
+         mschl      TYPE bseg-mschl,
+         mansp      TYPE bseg-mansp,
+         madat      TYPE bseg-madat,
+         manst      TYPE bseg-manst,
+         maber      TYPE bseg-maber,
+         esrnr      TYPE bseg-esrnr,
+         esrre      TYPE bseg-esrre,
+         esrpz      TYPE bseg-esrpz,
+         klibt      TYPE bseg-klibt,
+         qsznr      TYPE bseg-qsznr,
+         qbshb      TYPE bseg-qbshb,
+         qsfbt      TYPE bseg-qsfbt,
+         navhw      TYPE bseg-navhw,
+         navfw      TYPE bseg-navfw,
+         matnr      TYPE bseg-matnr,
+         werks      TYPE bseg-werks,
+         menge      TYPE bseg-menge,
+         meins      TYPE bseg-meins,
+         erfmg      TYPE bseg-erfmg,
+         erfme      TYPE bseg-erfme,
+         bpmng      TYPE bseg-bpmng,
+         bprme      TYPE bseg-bprme,
+         ebeln      TYPE bseg-ebeln,
+         ebelp      TYPE bseg-ebelp,
+         zekkn      TYPE bseg-zekkn,
+         elikz      TYPE bseg-elikz,
+         vprsv      TYPE bseg-vprsv,
+         peinh      TYPE bseg-peinh,
+         bwkey      TYPE bseg-bwkey,
+         bwtar      TYPE bseg-bwtar,
+         bustw      TYPE bseg-bustw,
+         rewrt      TYPE bseg-rewrt,
+         rewwr      TYPE bseg-rewwr,
+         bonfb      TYPE bseg-bonfb,
+         bualt      TYPE bseg-bualt,
+         psalt      TYPE bseg-psalt,
+         nprei      TYPE bseg-nprei,
+         tbtkz      TYPE bseg-tbtkz,
+         spgrp      TYPE bseg-spgrp,
+         spgrm      TYPE bseg-spgrm,
+         spgrt      TYPE bseg-spgrt,
+         spgrg      TYPE bseg-spgrg,
+         spgrv      TYPE bseg-spgrv,
+         spgrq      TYPE bseg-spgrq,
+         stceg      TYPE bseg-stceg,
+         egbld      TYPE bseg-egbld,
+         eglld      TYPE bseg-eglld,
+         rstgr      TYPE bseg-rstgr,
+         ryacq      TYPE bseg-ryacq,
+         rpacq      TYPE bseg-rpacq,
+         rdiff      TYPE bseg-rdiff,
+         rdif2      TYPE bseg-rdif2,
+         prctr      TYPE bseg-prctr,
+         xhkom      TYPE bseg-xhkom,
+         vname      TYPE bseg-vname,
+         recid      TYPE bseg-recid,
+         egrup      TYPE bseg-egrup,
+         vptnr      TYPE bseg-vptnr,
+         vertt      TYPE bseg-vertt,
+         vertn      TYPE bseg-vertn,
+         vbewa      TYPE bseg-vbewa,
+         depot      TYPE bseg-depot,
+         txjcd      TYPE bseg-txjcd,
+         imkey      TYPE bseg-imkey,
+         dabrz      TYPE bseg-dabrz,
+         popts      TYPE bseg-popts,
+         fipos      TYPE bseg-fipos,
+         kstrg      TYPE bseg-kstrg,
+         nplnr      TYPE bseg-nplnr,
+         aufpl      TYPE bseg-aufpl,
+         aplzl      TYPE bseg-aplzl,
+         projk      TYPE bseg-projk,
+         paobjnr    TYPE bseg-paobjnr,
+         pasubnr    TYPE bseg-pasubnr,
+         spgrs      TYPE bseg-spgrs,
+         spgrc      TYPE bseg-spgrc,
+         btype      TYPE bseg-btype,
+         etype      TYPE bseg-etype,
+         xegdr      TYPE bseg-xegdr,
+         lnran      TYPE bseg-lnran,
+         hrkft      TYPE bseg-hrkft,
+         dmbe2      TYPE bseg-dmbe2,
+         dmbe3      TYPE bseg-dmbe3,
+         dmb21      TYPE bseg-dmb21,
+         dmb22      TYPE bseg-dmb22,
+         dmb23      TYPE bseg-dmb23,
+         dmb31      TYPE bseg-dmb31,
+         dmb32      TYPE bseg-dmb32,
+         dmb33      TYPE bseg-dmb33,
+         mwst2      TYPE bseg-mwst2,
+         mwst3      TYPE bseg-mwst3,
+         navh2      TYPE bseg-navh2,
+         navh3      TYPE bseg-navh3,
+         sknt2      TYPE bseg-sknt2,
+         sknt3      TYPE bseg-sknt3,
+         bdif3      TYPE bseg-bdif3,
+         hwmet      TYPE bseg-hwmet,
+         glupm      TYPE bseg-glupm,
+         xragl      TYPE bseg-xragl,
+         uzawe      TYPE bseg-uzawe,
+         lokkt      TYPE bseg-lokkt,
+         fistl      TYPE bseg-fistl,
+         geber      TYPE bseg-geber,
+         stbuk      TYPE bseg-stbuk,
+         txbh2      TYPE bseg-txbh2,
+         txbh3      TYPE bseg-txbh3,
+         pprct      TYPE bseg-pprct,
+         xref1      TYPE bseg-xref1,
+         xref2      TYPE bseg-xref2,
+         kblnr      TYPE bseg-kblnr,
+         kblpos     TYPE bseg-kblpos,
+         sttax      TYPE bseg-sttax,
+         fkber      TYPE bseg-fkber,
+         obzei      TYPE bseg-obzei,
+         xnegp      TYPE bseg-xnegp,
+         rfzei      TYPE bseg-rfzei,
+         ccbtc      TYPE bseg-ccbtc,
+         kkber      TYPE bseg-kkber,
+         empfb      TYPE bseg-empfb,
+         xref3      TYPE bseg-xref3,
+         dtws1      TYPE bseg-dtws1,
+         dtws2      TYPE bseg-dtws2,
+         dtws3      TYPE bseg-dtws3,
+         dtws4      TYPE bseg-dtws4,
+         gricd      TYPE bseg-gricd,
+         grirg      TYPE bseg-grirg,
+         gityp      TYPE bseg-gityp,
+         xpypr      TYPE bseg-xpypr,
+         kidno      TYPE bseg-kidno,
+         absbt      TYPE bseg-absbt,
+         idxsp      TYPE bseg-idxsp,
+         linfv      TYPE bseg-linfv,
+         kontt      TYPE bseg-kontt,
+         kontl      TYPE bseg-kontl,
+         txdat      TYPE bseg-txdat,
+         agzei      TYPE bseg-agzei,
+         pycur      TYPE bseg-pycur,
+         pyamt      TYPE bseg-pyamt,
+         bupla      TYPE bseg-bupla,
+         secco      TYPE bseg-secco,
+         lstar      TYPE bseg-lstar,
+         cession_kz TYPE bseg-cession_kz,
+         prznr      TYPE bseg-prznr,
+         ppdiff     TYPE bseg-ppdiff,
+         ppdif2     TYPE bseg-ppdif2,
+         ppdif3     TYPE bseg-ppdif3,
+         penlc1     TYPE bseg-penlc1,
+         penlc2     TYPE bseg-penlc2,
+         penlc3     TYPE bseg-penlc3,
+         penfc      TYPE bseg-penfc,
+         pendays    TYPE bseg-pendays,
+         penrc      TYPE bseg-penrc,
+         zzsl       TYPE bseg-zzsl,
+         grant_nbr  TYPE bseg-grant_nbr,
+         sctax      TYPE bseg-sctax,
+         fkber_long TYPE bseg-fkber_long,
+         gmvkz      TYPE bseg-gmvkz,
+         srtype     TYPE bseg-srtype,
+         intreno    TYPE bseg-intreno,
+         measure    TYPE bseg-measure,
+         auggj      TYPE bseg-auggj,
+         ppa_ex_ind TYPE bseg-ppa_ex_ind,
+         docln      TYPE bseg-docln,
+         segment    TYPE bseg-segment,
+         psegment   TYPE bseg-psegment,
+         pfkber     TYPE bseg-pfkber,
+         hktid      TYPE bseg-hktid,
+         kstar      TYPE bseg-kstar,
+         xlgclr     TYPE bseg-xlgclr,
+         taxps      TYPE bseg-taxps,
+         pays_prov  TYPE bseg-pays_prov,
+         pays_tran  TYPE bseg-pays_tran,
+         mndid      TYPE bseg-mndid,
+         xfrge_bseg TYPE bseg-xfrge_bseg,
+         squan      TYPE bseg-squan,
+         pgeber     TYPE bseg-pgeber,
+         pgrant_nbr TYPE bseg-pgrant_nbr,
+         budget_pd  TYPE bseg-budget_pd,
+         pbudget_pd TYPE bseg-pbudget_pd,
+         j_1tpbupl  TYPE bseg-j_1tpbupl,
+         perop_beg  TYPE bseg-perop_beg,
+         perop_end  TYPE bseg-perop_end,
+         fastpay    TYPE bseg-fastpay,
+         ignr_ivref TYPE bseg-ignr_ivref,
+         fmfgus_key TYPE bseg-fmfgus_key,
+         fmxdocnr   TYPE bseg-fmxdocnr,
+         fmxyear    TYPE bseg-fmxyear,
+         fmxdocln   TYPE bseg-fmxdocln,
+         fmxzekkn   TYPE bseg-fmxzekkn,
+         prodper    TYPE bseg-prodper,
+         inward_no  TYPE bseg-inward_no,
+         inward_dt  TYPE bseg-inward_dt,
+         pymtkey    TYPE bseg-pymtkey,
+*         vbund      TYPE bseg-vbund,
+
+
+         blart      TYPE bkpf-blart,
+         bldat      TYPE bkpf-bldat,
+         budat      TYPE bkpf-budat,
+         usnam      TYPE bkpf-usnam,
+         waers      TYPE bkpf-waers,
+         xblnr      TYPE bkpf-xblnr,
+
+         name1      TYPE kna1-name1,
+         name2      TYPE lfa1-name1,
+
+
+
+       END OF st_table.
+
+
+
+
+DATA: it_table TYPE TABLE OF st_table WITH HEADER LINE,
+      wa_table TYPE st_table.
+
+DATA: t_fieldcat            TYPE slis_t_fieldcat_alv WITH HEADER LINE.
+
+DATA: w_callback_subroutine TYPE slis_formname,
+      w_callback_program    LIKE sy-repid,
+      gd_layout             TYPE slis_layout_alv.
+
+
+
+
+
+
+SELECTION-SCREEN: BEGIN OF BLOCK b1 WITH FRAME TITLE text-001.
+
+SELECT-OPTIONS:
+
+  s_bukrs FOR bseg-bukrs,
+  s_belnr FOR bseg-belnr,
+  s_gjahr FOR bseg-gjahr,
+  s_xblnr for bkpf-xblnr,           "Ju
+  s_blart FOR bkpf-blart,
+  s_bldat FOR bkpf-bldat,
+  s_budat FOR bkpf-budat,
+  s_usnam FOR bkpf-usnam,
+  s_augcp FOR bseg-augcp,
+  s_augbl FOR bseg-augbl,
+  s_bschl FOR bseg-bschl,
+  s_koart FOR bseg-koart,
+  s_umskz FOR bseg-umskz,
+  s_mwskz FOR bseg-mwskz,
+  s_saknr FOR bseg-saknr,
+  s_hkont FOR bseg-hkont,
+  s_kunnr FOR bseg-kunnr,
+  s_lifnr FOR bseg-lifnr,
+  s_ebeln FOR bseg-ebeln,
+  s_projk FOR bseg-projk,
+  s_zuonr FOR bseg-zuonr,
+  s_anln1 FOR bseg-anln1.
+
+
+
+SELECTION-SCREEN: END OF BLOCK b1.
+
+
+
+
+START-OF-SELECTION.
+
+  PERFORM output_data.
+  PERFORM build_catalog.
+  PERFORM display_data.
+
+END-OF-SELECTION.
+
+
+*&---------------------------------------------------------------------*
+*&      Form  OUTPUT_DATA
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM output_data .
+
+  SELECT
+         bseg~mandt,
+         bseg~bukrs,
+         bseg~belnr,
+         bseg~gjahr,
+         bseg~buzei,
+         bseg~buzid,
+         bseg~augdt,
+         bseg~augcp,
+         bseg~augbl,
+         bseg~bschl,
+         bseg~koart,
+         bseg~umskz,
+         bseg~umsks,
+         bseg~zumsk,
+         bseg~shkzg,
+         bseg~gsber,
+         bseg~pargb,
+         bseg~mwskz,
+         bseg~qsskz,
+         bseg~dmbtr,
+         bseg~wrbtr,
+         bseg~kzbtr,
+         bseg~pswbt,
+         bseg~pswsl,
+         bseg~txbhw,
+         bseg~txbfw,
+         bseg~mwsts,
+         bseg~wmwst,
+         bseg~hwbas,
+         bseg~fwbas,
+         bseg~hwzuz,
+         bseg~fwzuz,
+         bseg~shzuz,
+         bseg~stekz,
+         bseg~mwart,
+         bseg~txgrp,
+         bseg~ktosl,
+         bseg~qsshb,
+         bseg~kursr,
+         bseg~gbetr,
+         bseg~bdiff,
+         bseg~bdif2,
+         bseg~valut,
+         bseg~zuonr,
+         bseg~sgtxt,
+         bseg~zinkz,
+         bseg~vbund,
+         bseg~bewar,
+         bseg~altkt,
+         bseg~vorgn,
+         bseg~fdlev,
+         bseg~fdgrp,
+         bseg~fdwbt,
+         bseg~fdtag,
+         bseg~fkont,
+         bseg~kokrs,
+         bseg~kostl,
+         bseg~projn,
+         bseg~aufnr,
+         bseg~vbeln,
+         bseg~vbel2,
+         bseg~posn2,
+         bseg~eten2,
+         bseg~anln1,
+         bseg~anln2,
+         bseg~anbwa,
+         bseg~bzdat,
+         bseg~pernr,
+         bseg~xumsw,
+         bseg~xhres,
+         bseg~xkres,
+         bseg~xopvw,
+         bseg~xcpdd,
+         bseg~xskst,
+         bseg~xsauf,
+         bseg~xspro,
+         bseg~xserg,
+         bseg~xfakt,
+         bseg~xuman,
+         bseg~xanet,
+         bseg~xskrl,
+         bseg~xinve,
+         bseg~xpanz,
+         bseg~xauto,
+         bseg~xncop,
+         bseg~xzahl,
+         bseg~saknr,
+         bseg~hkont,
+         bseg~kunnr,
+         bseg~lifnr,
+         bseg~filkd,
+         bseg~xbilk,
+         bseg~gvtyp,
+         bseg~hzuon,
+         bseg~zfbdt,
+         bseg~zterm,
+         bseg~zbd1t,
+         bseg~zbd2t,
+         bseg~zbd3t,
+         bseg~zbd1p,
+         bseg~zbd2p,
+         bseg~skfbt,
+         bseg~sknto,
+         bseg~wskto,
+         bseg~zlsch,
+         bseg~zlspr,
+         bseg~zbfix,
+         bseg~hbkid,
+         bseg~bvtyp,
+         bseg~nebtr,
+         bseg~mwsk1,
+         bseg~dmbt1,
+         bseg~wrbt1,
+         bseg~mwsk2,
+         bseg~dmbt2,
+         bseg~wrbt2,
+         bseg~mwsk3,
+         bseg~dmbt3,
+         bseg~wrbt3,
+         bseg~rebzg,
+         bseg~rebzj,
+         bseg~rebzz,
+         bseg~rebzt,
+         bseg~zollt,
+         bseg~zolld,
+         bseg~lzbkz,
+         bseg~diekz,
+         bseg~samnr,
+         bseg~abper,
+         bseg~vrskz,
+         bseg~vrsdt,
+         bseg~disbn,
+         bseg~disbj,
+         bseg~disbz,
+         bseg~wverw,
+         bseg~anfbn,
+         bseg~anfbj,
+         bseg~anfbu,
+         bseg~anfae,
+         bseg~blnbt,
+         bseg~blnkz,
+         bseg~blnpz,
+         bseg~mschl,
+         bseg~mansp,
+         bseg~madat,
+         bseg~manst,
+         bseg~maber,
+         bseg~esrnr,
+         bseg~esrre,
+         bseg~esrpz,
+         bseg~klibt,
+         bseg~qsznr,
+         bseg~qbshb,
+         bseg~qsfbt,
+         bseg~navhw,
+         bseg~navfw,
+         bseg~matnr,
+         bseg~werks,
+         bseg~menge,
+         bseg~meins,
+         bseg~erfmg,
+         bseg~erfme,
+         bseg~bpmng,
+         bseg~bprme,
+         bseg~ebeln,
+         bseg~ebelp,
+         bseg~zekkn,
+         bseg~elikz,
+         bseg~vprsv,
+         bseg~peinh,
+         bseg~bwkey,
+         bseg~bwtar,
+         bseg~bustw,
+         bseg~rewrt,
+         bseg~rewwr,
+         bseg~bonfb,
+         bseg~bualt,
+         bseg~psalt,
+         bseg~nprei,
+         bseg~tbtkz,
+         bseg~spgrp,
+         bseg~spgrm,
+         bseg~spgrt,
+         bseg~spgrg,
+         bseg~spgrv,
+         bseg~spgrq,
+         bseg~stceg,
+         bseg~egbld,
+         bseg~eglld,
+         bseg~rstgr,
+         bseg~ryacq,
+         bseg~rpacq,
+         bseg~rdiff,
+         bseg~rdif2,
+         bseg~prctr,
+         bseg~xhkom,
+         bseg~vname,
+         bseg~recid,
+         bseg~egrup,
+         bseg~vptnr,
+         bseg~vertt,
+         bseg~vertn,
+         bseg~vbewa,
+         bseg~depot,
+         bseg~txjcd,
+         bseg~imkey,
+         bseg~dabrz,
+         bseg~popts,
+         bseg~fipos,
+         bseg~kstrg,
+         bseg~nplnr,
+         bseg~aufpl,
+         bseg~aplzl,
+         bseg~projk,
+         bseg~paobjnr,
+         bseg~pasubnr,
+         bseg~spgrs,
+         bseg~spgrc,
+         bseg~btype,
+         bseg~etype,
+         bseg~xegdr,
+         bseg~lnran,
+         bseg~hrkft,
+         bseg~dmbe2,
+         bseg~dmbe3,
+         bseg~dmb21,
+         bseg~dmb22,
+         bseg~dmb31,
+         bseg~dmb32,
+         bseg~dmb33,
+         bseg~mwst2,
+         bseg~mwst3,
+         bseg~navh2,
+         bseg~navh3,
+         bseg~sknt2,
+         bseg~sknt3,
+         bseg~bdif3,
+         bseg~hwmet,
+         bseg~glupm,
+         bseg~xragl,
+         bseg~uzawe,
+         bseg~lokkt,
+         bseg~fistl,
+         bseg~geber,
+         bseg~stbuk,
+         bseg~txbh2,
+         bseg~txbh3,
+         bseg~pprct,
+         bseg~xref1,
+         bseg~xref2,
+         bseg~kblnr,
+         bseg~kblpos,
+         bseg~sttax,
+         bseg~fkber,
+         bseg~obzei,
+         bseg~xnegp,
+         bseg~rfzei,
+         bseg~ccbtc,
+         bseg~kkber,
+         bseg~empfb,
+         bseg~xref3,
+         bseg~dtws1,
+         bseg~dtws2,
+         bseg~dtws3,
+         bseg~dtws4,
+         bseg~gricd,
+         bseg~grirg,
+         bseg~gityp,
+         bseg~xpypr,
+         bseg~kidno,
+         bseg~absbt,
+         bseg~idxsp,
+         bseg~linfv,
+         bseg~kontt,
+         bseg~kontl,
+         bseg~txdat,
+         bseg~agzei,
+         bseg~pycur,
+         bseg~pyamt,
+         bseg~bupla,
+         bseg~secco,
+         bseg~lstar,
+         bseg~cession_kz,
+         bseg~prznr,
+         bseg~ppdiff,
+         bseg~ppdif2,
+         bseg~ppdif3,
+         bseg~penlc1,
+         bseg~penlc2,
+         bseg~penlc3,
+         bseg~penfc,
+         bseg~pendays,
+         bseg~penrc,
+         bseg~zzsl,
+         bseg~grant_nbr,
+         bseg~sctax,
+         bseg~fkber_long,
+         bseg~gmvkz,
+         bseg~srtype,
+         bseg~intreno,
+         bseg~measure,
+         bseg~auggj,
+         bseg~ppa_ex_ind,
+         bseg~docln,
+         bseg~segment,
+         bseg~psegment,
+         bseg~pfkber,
+         bseg~hktid,
+         bseg~kstar,
+         bseg~xlgclr,
+         bseg~taxps,
+         bseg~pays_prov,
+         bseg~pays_tran,
+         bseg~mndid,
+         bseg~xfrge_bseg,
+         bseg~squan,
+         bseg~pgeber,
+         bseg~pgrant_nbr,
+         bseg~budget_pd,
+         bseg~pbudget_pd,
+         bseg~j_1tpbupl,
+         bseg~perop_beg,
+         bseg~perop_end,
+         bseg~fastpay,
+         bseg~ignr_ivref,
+         bseg~fmfgus_key,
+         bseg~fmxdocnr,
+         bseg~fmxyear,
+         bseg~fmxdocln,
+         bseg~fmxzekkn,
+         bseg~prodper,
+         bseg~inward_no,
+         bseg~inward_dt,
+         bseg~pymtkey,
+         bseg~landl,
+
+         bkpf~blart,
+         bkpf~bldat,
+         bkpf~budat,
+         bkpf~usnam,
+         bkpf~waers,
+         bkpf~xblnr
+
+
+         INTO CORRESPONDING FIELDS OF TABLE @it_table FROM bseg AS bseg INNER JOIN bkpf AS bkpf  ON
+*                                                                                  bseg~mandt = bkpf~mandt AND
+                                                                                   bseg~bukrs = bkpf~bukrs AND
+                                                                                   bseg~belnr = bkpf~belnr AND
+                                                                                   bseg~gjahr = bkpf~gjahr
+
+                                                                        WHERE
+                                                                                   bseg~bukrs IN @s_bukrs AND
+                                                                                   bseg~belnr IN @s_belnr AND
+                                                                                   bseg~gjahr IN @s_gjahr AND
+                                                                                   bseg~augcp IN @s_augcp AND
+                                                                                   bseg~augbl IN @s_augbl AND
+                                                                                   bseg~bschl IN @s_bschl AND
+                                                                                   bseg~koart IN @s_koart AND
+                                                                                   bseg~umskz IN @s_umskz AND
+                                                                                   bseg~mwskz IN @s_mwskz AND
+                                                                                   bseg~saknr IN @s_saknr AND
+                                                                                   bseg~hkont IN @s_hkont AND
+                                                                                   bseg~kunnr IN @s_kunnr AND
+                                                                                   bseg~lifnr IN @s_lifnr AND
+                                                                                   bseg~ebeln IN @s_ebeln AND
+                                                                                   bseg~projk IN @s_projk AND
+                                                                                   bseg~zuonr IN @s_zuonr AND
+                                                                                   bkpf~blart IN @s_blart AND
+                                                                                   bkpf~bldat IN @s_bldat AND
+                                                                                   bkpf~budat IN @s_budat AND
+                                                                                   bkpf~usnam IN @s_usnam AND
+                                                                                   bseg~anln1 IN @s_anln1 and
+                                                                                   bkpf~xblnr IN @s_xblnr.        "Ju
+
+
+
+
+  LOOP AT it_table INTO it_table.
+
+    IF it_table-kunnr NE ''.
+
+      SELECT name1 FROM kna1 INTO it_table-name1 WHERE kunnr = it_table-kunnr.
+       ENDSELECT.
+
+    ENDIF.
+
+
+    IF it_table-lifnr NE ''.
+
+      SELECT name1 FROM lfa1 INTO it_table-name2 WHERE lifnr = it_table-lifnr.
+       ENDSELECT.
+
+    ENDIF.
+
+    MODIFY it_table.
+
+
+  ENDLOOP.
+
+
+ENDFORM.
+
+
+
+
+*&---------------------------------------------------------------------*
+*&      Form  DISPLAY_DATA
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM display_data .
+
+  CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'
+    EXPORTING
+*     I_INTERFACE_CHECK       = ' '
+*     I_BYPASSING_BUFFER      = ' '
+*     I_BUFFER_ACTIVE         = ' '
+      i_callback_program      = sy-cprog
+*     I_CALLBACK_PF_STATUS_SET          = ' '
+      i_callback_user_command = w_callback_subroutine
+*     I_CALLBACK_TOP_OF_PAGE  = ' '
+*     I_CALLBACK_HTML_TOP_OF_PAGE       = ' '
+*     I_CALLBACK_HTML_END_OF_LIST       = ' '
+*     I_STRUCTURE_NAME        =
+*     I_BACKGROUND_ID         = ' '
+*     I_GRID_TITLE            =
+*     I_GRID_SETTINGS         =
+      is_layout               = gd_layout
+      it_fieldcat             = t_fieldcat[]
+*     IT_EXCLUDING            =
+*     IT_SPECIAL_GROUPS       =
+*     IT_SORT                 =
+*     IT_FILTER               =
+*     IS_SEL_HIDE             =
+*     I_DEFAULT               = 'X'
+     I_SAVE                  = 'X'
+*     IS_VARIANT              =
+*     IT_EVENTS               =
+*     IT_EVENT_EXIT           =
+*     IS_PRINT                =
+*     IS_REPREP_ID            =
+*     I_SCREEN_START_COLUMN   = 0
+*     I_SCREEN_START_LINE     = 0
+*     I_SCREEN_END_COLUMN     = 0
+*     I_SCREEN_END_LINE       = 0
+*     I_HTML_HEIGHT_TOP       = 0
+*     I_HTML_HEIGHT_END       = 0
+*     IT_ALV_GRAPHICS         =
+*     IT_HYPERLINK            =
+*     IT_ADD_FIELDCAT         =
+*     IT_EXCEPT_QINFO         =
+*     IR_SALV_FULLSCREEN_ADAPTER        =
+*   IMPORTING
+*     E_EXIT_CAUSED_BY_CALLER =
+*     ES_EXIT_CAUSED_BY_USER  =
+    TABLES
+      t_outtab                = it_table
+    EXCEPTIONS
+      program_error           = 1
+      OTHERS                  = 2.
+  IF sy-subrc <> 0.
+* Implement suitable error handling here
+    WRITE: /'The number of error is: ', sy-subrc.
+
+  ENDIF.
+
+ENDFORM.
+
+
+
+*&---------------------------------------------------------------------*
+*&      Form  BUILD_CATALOG
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
+FORM build_catalog .
+
+  t_fieldcat-fieldname = 'BUKRS'.
+  t_fieldcat-seltext_m = 'Company Code'.
+  t_fieldcat-col_pos = 1.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'BELNR'.
+  t_fieldcat-seltext_m = 'Document Number'.
+  t_fieldcat-outputlen = 15.
+  t_fieldcat-col_pos = 2.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'GJAHR'.
+  t_fieldcat-seltext_m = 'Fiscal Year'.
+  t_fieldcat-col_pos = 3.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'BLART'.
+  t_fieldcat-seltext_m = 'Document Type'.
+  t_fieldcat-col_pos = 4.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'BLDAT'.
+  t_fieldcat-seltext_m = 'Document Date'.
+  t_fieldcat-col_pos = 5.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'BUDAT'.
+  t_fieldcat-seltext_m = 'Posting Date'.
+  t_fieldcat-col_pos = 6.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'XBLNR'.
+  t_fieldcat-seltext_m = 'Reference'.
+  t_fieldcat-col_pos = 7.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'USNAM'.
+  t_fieldcat-seltext_m = 'User name'.
+  t_fieldcat-col_pos = 8.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'WAERS'.
+  t_fieldcat-seltext_m = 'Currency'.
+  t_fieldcat-col_pos = 9.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'BUZEI'.
+  t_fieldcat-seltext_m = 'Line item'.
+  t_fieldcat-col_pos = 10.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'AUGDT'.
+  t_fieldcat-seltext_m = 'Clearing'.
+  t_fieldcat-col_pos = 11.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'AUGCP'.
+  t_fieldcat-seltext_m = 'ClearingEntDate'.
+  t_fieldcat-col_pos = 12.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'AUGBL'.
+  t_fieldcat-seltext_m = 'Clrng doc.'.
+  t_fieldcat-col_pos = 13.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'BSCHL'.
+  t_fieldcat-seltext_m = 'Posting key'.
+  t_fieldcat-col_pos = 14.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'KOART'.
+  t_fieldcat-seltext_m = 'Account Type'.
+  t_fieldcat-col_pos = 15.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'UMSKZ'.
+  t_fieldcat-seltext_m = 'Special G/L ind'.
+  t_fieldcat-col_pos = 16.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'UMSKS'.
+  t_fieldcat-seltext_m = 'Transact.type'.
+  t_fieldcat-col_pos = 17.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'SHKZG'.
+  t_fieldcat-seltext_m = 'Debit/Credit'.
+  t_fieldcat-col_pos = 18.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'MWSKZ'.
+  t_fieldcat-seltext_m = 'Tax code'.
+  t_fieldcat-col_pos = 19.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'DMBTR'.
+  t_fieldcat-seltext_m = 'Amount in LC'.
+  t_fieldcat-col_pos = 20.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'WRBTR'.
+  t_fieldcat-seltext_m = 'Amount'.
+  t_fieldcat-col_pos = 21.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'VALUT'.
+  t_fieldcat-seltext_m = 'Value Date'.
+  t_fieldcat-col_pos = 22.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'ZUONR'.
+  t_fieldcat-seltext_m = 'Assignment'.
+  t_fieldcat-col_pos = 23.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'SGTXT'.
+  t_fieldcat-seltext_m = 'Text'.
+  t_fieldcat-col_pos = 24.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'VORGN'.
+  t_fieldcat-seltext_m = 'Activity type'.
+  t_fieldcat-col_pos = 25.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'KOKRS'.
+  t_fieldcat-seltext_m = 'CO Area'.
+  t_fieldcat-col_pos = 26.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'KOSTL'.
+  t_fieldcat-seltext_m = 'Cost Center'.
+  t_fieldcat-col_pos = 27.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'AUFNR'.
+  t_fieldcat-seltext_m = 'Order'.
+  t_fieldcat-col_pos = 28.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'VBELN'.
+  t_fieldcat-seltext_m = 'Billing Doc.'.
+  t_fieldcat-col_pos = 29.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'VBEL2'.
+  t_fieldcat-seltext_m = 'Sales Document'.
+  t_fieldcat-col_pos = 30.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'POSN2'.
+  t_fieldcat-seltext_m = 'Item'.
+  t_fieldcat-col_pos = 31.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'ETEN2'.
+  t_fieldcat-seltext_m = 'Schedule Line'.
+  t_fieldcat-col_pos = 32.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'ANLN1'.
+  t_fieldcat-seltext_m = 'Asset'.
+  t_fieldcat-col_pos = 33.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'ANLN2'.
+  t_fieldcat-seltext_m = 'Subnumber'.
+  t_fieldcat-col_pos = 34.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'ANBWA'.
+  t_fieldcat-seltext_m = 'Trans. type'.
+  t_fieldcat-col_pos = 35.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'BZDAT'.
+  t_fieldcat-seltext_m = 'Asset Val. Date'.
+  t_fieldcat-col_pos = 36.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'SAKNR'.
+  t_fieldcat-seltext_m = 'G/L Account'.
+  t_fieldcat-col_pos = 37.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'HKONT'.
+  t_fieldcat-seltext_m = 'G/L'.
+  t_fieldcat-col_pos = 38.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'KUNNR'.
+  t_fieldcat-seltext_m = 'Customer'.
+  t_fieldcat-col_pos = 39.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'NAME1'.
+  t_fieldcat-seltext_m = 'Description'.
+  t_fieldcat-tabname = 'KNA1'.
+  t_fieldcat-outputlen = 25.
+  t_fieldcat-col_pos = 40.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'LIFNR'.
+  t_fieldcat-seltext_m = 'Vendor'.
+  t_fieldcat-col_pos = 41.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'NAME2'.
+  t_fieldcat-seltext_m = 'Description'.
+  t_fieldcat-tabname = 'LFA1'.
+  t_fieldcat-outputlen = 25.
+  t_fieldcat-col_pos = 42.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'FILKD'.
+  t_fieldcat-seltext_m = 'Branch'.
+  t_fieldcat-col_pos = 43.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'XBILK'.
+  t_fieldcat-seltext_m = 'Balance Sheet Acct'.
+  t_fieldcat-col_pos = 44.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'GVTYP'.
+  t_fieldcat-seltext_m = 'P&L Stmt A/c Ty'.
+  t_fieldcat-col_pos = 45.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'HZUON'.
+  t_fieldcat-seltext_m = 'Sp.G/L assgt'.
+  t_fieldcat-col_pos = 46.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'ZFBDT'.
+  t_fieldcat-seltext_m = 'Baseline Date'.
+  t_fieldcat-col_pos = 47.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'ZTERM'.
+  t_fieldcat-seltext_m = 'Payt Terms'.
+  t_fieldcat-col_pos = 48.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'ZBD1T'.
+  t_fieldcat-seltext_m = 'Days 1'.
+  t_fieldcat-col_pos = 49.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'SKFBT'.
+  t_fieldcat-seltext_m = 'Disc. base'.
+  t_fieldcat-col_pos = 50.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'REBZG'.
+  t_fieldcat-seltext_m = 'Invoice ref.'.
+  t_fieldcat-col_pos = 51.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'LANDL'.
+  t_fieldcat-seltext_m = 'Suppl. Cntry'.
+  t_fieldcat-col_pos = 52.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'BWKEY'.
+  t_fieldcat-seltext_m = 'Valuation Area'.
+  t_fieldcat-col_pos = 53.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'BWTAR'.
+  t_fieldcat-seltext_m = 'Valuation Type'.
+  t_fieldcat-col_pos = 54.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'TBTKZ'.
+  t_fieldcat-seltext_m = 'Subseq. Dr/Cr'.
+  t_fieldcat-col_pos = 55.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'STCEG'.
+  t_fieldcat-seltext_m = 'VAT Reg. No.'.
+  t_fieldcat-col_pos = 56.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'EGBLD'.
+  t_fieldcat-seltext_m = 'Dest.country'.
+  t_fieldcat-col_pos = 57.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'PRCTR'.
+  t_fieldcat-seltext_m = 'Profit Center'.
+  t_fieldcat-col_pos = 58.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'PROJK'.
+  t_fieldcat-seltext_m = 'WBS Element'.
+  t_fieldcat-col_pos = 59.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'PAOBJNR'.
+  t_fieldcat-seltext_m = 'Profit. segment'.
+  t_fieldcat-col_pos = 60.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'XREF3'.
+  t_fieldcat-seltext_m = 'Reference Key 3'.
+  t_fieldcat-col_pos = 61.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'XREF1'.
+  t_fieldcat-seltext_m = 'Reference Key 1'.
+  t_fieldcat-col_pos = 62.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'XREF2'.
+  t_fieldcat-seltext_m = 'Reference Key 2'.
+  t_fieldcat-col_pos = 63.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'ZZSL'.
+  t_fieldcat-seltext_m = 'Storage Locat'.
+  t_fieldcat-col_pos = 64.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'HWBAS'.
+  t_fieldcat-seltext_m = 'LC base amnt'.
+  t_fieldcat-col_pos = 65.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'FWBAS'.
+  t_fieldcat-seltext_m = 'Base amount'.
+  t_fieldcat-col_pos = 66.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'KTOSL'.
+  t_fieldcat-seltext_m = 'Transaction'.
+  t_fieldcat-col_pos = 67.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'MEINS'.
+  t_fieldcat-seltext_m = 'Base Unit'.
+  t_fieldcat-col_pos = 68.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'MENGE'.
+  t_fieldcat-seltext_m = 'Quantity'.
+  t_fieldcat-col_pos = 69.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'MATNR'.
+  t_fieldcat-seltext_m = 'Material'.
+  t_fieldcat-no_zero = 'X'.
+  t_fieldcat-col_pos = 70.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'VBUND'.
+  t_fieldcat-seltext_m = 'Trading Partner'.
+  t_fieldcat-col_pos = 71.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'EBELN'.
+  t_fieldcat-seltext_m = 'Purchasing Document'.
+  t_fieldcat-col_pos = 72.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+  t_fieldcat-fieldname = 'EBELP'.
+  t_fieldcat-seltext_m = 'PO Item'.
+  t_fieldcat-col_pos = 73.
+  APPEND t_fieldcat TO t_fieldcat.
+  CLEAR t_fieldcat.
+
+
+
+
+
+
+ENDFORM.
